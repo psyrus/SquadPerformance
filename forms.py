@@ -14,4 +14,4 @@ class FpsForm(Form):
     gpu = StringField('GPU', [validators.InputRequired()])
     ram = StringField('RAM', [validators.InputRequired()])
     #fps_values = FileField('FPS Values CSV file', [validators.regexp(u'^[^/\\]\.csv$')])
-    fps_values = FileField('FPS Values CSV file')
+    fps_values = FileField('FPS Values CSV file', [validators.regexp(ur'^[^/\\]\.csv$')])

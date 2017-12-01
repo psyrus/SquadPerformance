@@ -16,6 +16,7 @@
         <div class="container">
             <h1>{{ page_title }}</h1>
             <div>
+                <form method="post" action="{{ url_for('fps_submitted') }}">
                 <table>
                     {% for field in form %}
                     <tr>
@@ -23,7 +24,11 @@
                         <td>{{ field }}</td>
                     </tr>
                     {% endfor %}
+                    <tr>
+                        <td colspan="2"><input type="submit"></td>
+                    </tr>
                 </table>
+                </form>
             </div>
         </div>
     </section>
