@@ -1,37 +1,35 @@
-<html>
-{% set page_title = "Squad Performance" %}
+{% extends "main_template.html" %}
+<!-- Main index page -->
+{% block title %}Squad Performance Metrics{% endblock %}
+<!-- Jumbotron -->
+{% block jumbotron %}
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">Squad Performance Metrics</h1>
+        <p>This website was created to address the issue of a lack of <strong>real world</strong> benchmark results that can be referenced by users to determine if their performance is consistent with other community members.</p>
+        <p>If you would like to contribute and add your data to help the community, see the link at the button below.</p>
+        <p><a class="btn btn-primary btn-lg" href="/how-to" role="button">Contribution Guidelines »</a></p>
+    </div>
+</div>
+{% endblock jumbotron %} {% block content %}
+<div class="row">
+    <div class="col-md-6 order-2 order-md-1">
+        <form method="post" action="{{ url_for('fps_submitted') }}" enctype="multipart/form-data">
 
-<head>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-</head>
-
-<body>
-    <section id="navSection">
-
-    </section>
-    <section id="contentSection">
-        <div class="container">
-            <h1>{{ page_title }}</h1>
-            <div>
-                <form method="post" action="{{ url_for('fps_submitted') }}">
-                <table>
-                    {% for field in form %}
-                    <tr>
-                        <th>{{ field.label }}</th>
-                        <td>{{ field }}</td>
-                    </tr>
-                    {% endfor %}
-                    <tr>
-                        <td colspan="2"><input type="submit"></td>
-                    </tr>
-                </table>
-                </form>
+            {% for field in form %}
+            <div class="row">
+                <div class="col-md-4">{{ field.label }}{% if field.flags.required %}*{% endif %}</div>
+                <div class="col-md-8">{{ field }}</div>
             </div>
-        </div>
-    </section>
-</body>
 
-</html>
+            {% endfor %}
+            <div class="row">
+                <input class="col-md-4 col-offset-md-8" type="submit" value="Add Statstics">
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6 order-1 order-md-2">
+        The system requires posters to have a submission code in lieu of a login for the time being. Please register your system specs on the <a href="/how-to">how-to page</a> to begin contributing. Current code is 1234submit
+    </div>
+</div>
+{% endblock content %}

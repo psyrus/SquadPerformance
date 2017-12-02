@@ -1,23 +1,34 @@
-<html>
- <head>
-   <title>Submitted form</title>
-   <link rel="stylesheet" type="text/css" href="/static/style.css">
- </head>
- <body>
-   <div id="container">
-     <div class="pagetitle">
-       <h1>Form submitted</h1>
-     </div>
-     <div id="main">
-       <p>Thanks for your submission, {{name}}!</p>
-       <p>Here's a review of the information that you sent:</p>
-       <p>
-          <strong>Name</strong>: {{name}} <br>
-          <strong>Email</strong>: {{email}} <br>
-          <strong>Website URL</strong>: {{site}} <br>
-          <strong>Comments</strong>: {{comments}}
-       </p>
-     </div>
-   </div>
- </body>
-</html>
+{% extends "main_template.html" %}
+<!-- FPS submitted by user page -->
+{% block title %}Thank you for your submission{% endblock %}
+<!-- Jumbotron -->
+{% block jumbotron %}
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">Thanks for the submission!</h1>
+        <p></p>
+    </div>
+</div>
+{% endblock jumbotron %} {% block content %}
+<h2>Submitted data</h2>
+<div>
+    <span>CPU: </span>
+    <span>{{ cpu }}</span>
+</div>
+<div>
+    <span>GPI: </span>
+    <span>{{ gpu }}</span>
+</div>
+<div>
+    <span>RAM: </span>
+    <span>{{ ram }}</span>
+</div>
+<div>
+    <span>Average FPS: </span>
+    <span>{{ avg }}</span>
+</div>
+<hr>
+<div>Raw Upload Data:</div>
+{% for entry in csv_data %}
+<div>{{entry}}</div>
+{% endfor %} {% endblock content %}

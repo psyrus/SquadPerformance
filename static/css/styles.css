@@ -1,0 +1,15 @@
+footer {
+    background-color: #c9c9c9;
+}
+
+main {
+    margin-bottom: 100px;
+}
+
+input[type=text] {
+    width: 100%;
+}
+
+#contentSection input {
+    margin-bottom: 10px;
+}

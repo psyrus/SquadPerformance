@@ -10,8 +10,9 @@ class RegistrationForm(Form):
 
 
 class FpsForm(Form):
+    code = StringField('Submission Code', [validators.InputRequired()])
     cpu = StringField('CPU', [validators.InputRequired()])
     gpu = StringField('GPU', [validators.InputRequired()])
     ram = StringField('RAM', [validators.InputRequired()])
-    #fps_values = FileField('FPS Values CSV file', [validators.regexp(u'^[^/\\]\.csv$')])
-    fps_values = FileField('FPS Values CSV file', [validators.regexp(ur'^[^/\\]\.csv$')])
+    fps_values = FileField('FPS Values CSV file')
+#    fps_values = FileField('FPS Values CSV file', [validators.regexp(ur'^[^/\\]\.csv$')])
