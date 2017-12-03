@@ -13,3 +13,13 @@ input[type=text] {
 #contentSection input {
     margin-bottom: 10px;
 }
+
+@media screen and (max-width: 768px) {
+    .display-3 {
+        font-size: 2rem;
+    }
+
+    main {
+        margin-top: 55px;
+    }
+}
