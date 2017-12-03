@@ -5,18 +5,24 @@
 {% block jumbotron %}
 <div class="jumbotron">
     <div class="container">
-        <h1 class="display-3">Thanks for the submission!</h1>
-        <p></p>
+        <h1 class="display-3">
+            Thanks for the submission!
+            {% if error_string %}
+             But...
+            {% endif %}
+        </h1>
+        {% if error_string %}<div class="alert alert-danger">{{ error_string }}</div>{% endif %}
     </div>
 </div>
 {% endblock jumbotron %} {% block content %}
+{% if not error_string %}
 <h2>Submitted data</h2>
 <div>
     <span>CPU: </span>
     <span>{{ cpu }}</span>
 </div>
 <div>
-    <span>GPI: </span>
+    <span>GPU: </span>
     <span>{{ gpu }}</span>
 </div>
 <div>
@@ -25,10 +31,16 @@
 </div>
 <div>
     <span>Average FPS: </span>
-    <span>{{ avg }}</span>
+    <span>{{ avg }} (± {{ std_dev }} )</span>
+</div>
+<div>
+    <span>Min/Max FPS: </span>
+    <span>{{ min_val }} / {{ max_val }} </span>
 </div>
 <hr>
 <div>Raw Upload Data:</div>
 {% for entry in csv_data %}
-<div>{{entry}}</div>
-{% endfor %} {% endblock content %}
+<div>{{ entry[0] }}</div>
+{% endfor %}
+{% endif %}
+{% endblock content %}
