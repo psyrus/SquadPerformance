@@ -1,0 +1,38 @@
+{% extends "main_template.html" %}
+<!-- Describe how to submit their data -->
+{% block title %}Contribution Guidelines{% endblock %}
+<!-- Jumbotron -->
+{% block jumbotron %}
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">How to contribute</h1>
+        <p>Due to the lack of benchmarking tools integrated into the main squad program, the smoothest solution that I could come up with was using a combination of free software and the "honor system" (I'm trusting the submissions) to establish some decent performance baselines for squad players around the world. </p>
+
+        <p>Ideally, if this system garners a few thousand submissions from a range of systems, it will provide a very feasible way to gauge any player's performance based on their specifications.</p>
+
+    </div>
+</div>
+{% endblock jumbotron %}
+<!-- Content Start -->
+{% block content %}
+<h2>Submissions</h2>
+<p>The submission process is slightly longwinded but to ensure consistency between users, it unfortunately has to be so. </p>
+
+<ul>
+    <li>Login (through steam)</li>
+    <li>Enter hardware specs</li>
+    <li>Download and install Fraps (trial version)</li>
+    <li>Set up benchmark key (F11 default)</li>
+    <li>Set benchmark to record 5 minutes</li>
+    <li>Set benchmark to only record FPS</li>
+    <li>Record benchmark and write down which benchmark is on what map
+        <ul>
+            <li>one per game</li>
+            <li>try to record when near the center of the map, or in intense action. Recording the briefing screen or the initial rollout is not very helpful to gauge performance</li>
+            <li>only if >75 players are present</li>
+        </ul>
+    </li>
+    <li>Submit benchmark(s)</li>
+    <li>Wait for approval from the admin to see your scores show up in the global stats</li>
+</ul>
+{% endblock content %}

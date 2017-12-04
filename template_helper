@@ -1,0 +1,15 @@
+{% extends "main_template.html" %}
+<!-- Description -->
+{% block title %}Title{% endblock %}
+<!-- Jumbotron -->
+{% block jumbotron %}
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">Jumbotron</h1>
+    </div>
+</div>
+{% endblock jumbotron %}
+<!-- Content Start -->
+{% block content %}
+
+{% endblock content %}
