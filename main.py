@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from forms import FpsForm
 import logging, csv, io
+from models import *
 app = Flask(__name__)
 
 @app.before_request
@@ -52,6 +53,7 @@ def fps_submitted():
     cpu = form.cpu.data
     gpu = form.gpu.data
     ram = form.ram.data
+    res = form.resolution.data
     csv_data = []
 
     #Exit if no files were uploaded
@@ -67,11 +69,13 @@ def fps_submitted():
     #Convert uploaded file to a list of strings for processing
     stream = io.StringIO(fileobj.read().decode("UTF8"), newline=None)
     csv_input = csv.reader(stream)
-    csv_data = list(csv_input)[1:]
+    csv_data = [int(i[0]) for i in list(csv_input)[1:] if len(i) > 0]
     avg = 0
 
+    if len(csv_data) < 250:
+        return render_template("submitted_form.html", error_string = "There were not enough FPS entries in the file, please ensure you benchmark 5 minutes of FPS")
     #Initialize a simple min_val/max_val to use for comparisons in the loop
-    min_val = int(csv_data[0][0])
+    min_val = csv_data[0]
     max_val = min_val
 
     invalid_lines = 0
@@ -80,7 +84,6 @@ def fps_submitted():
         if not item:
             invalid_lines += 1
             continue
-        item = int(item[0])
         avg += item
         max_val = item if max_val < item else max_val
         min_val = item if min_val > item else min_val
@@ -93,9 +96,11 @@ def fps_submitted():
     for item in csv_data:
         if not item:
             continue
-        total_diff_from_avg += abs(int(avg) - int(item[0]))
+        total_diff_from_avg += abs(int(avg) - item)
 
     std_dev = total_diff_from_avg / valid_data_count
+
+    testModel = PC_Config(cpu, gpu, ram, res)
 
     #Should make a view model to clean up the render_template call
     return render_template("submitted_form.html", cpu=cpu, gpu=gpu, ram=ram, avg=avg, std_dev = std_dev, max_val = max_val, min_val = min_val, csv_data=csv_data)

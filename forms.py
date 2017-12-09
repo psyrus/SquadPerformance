@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from wtforms import Form, BooleanField, StringField, FileField, validators
+from wtforms import Form, BooleanField, StringField, SelectField, FileField, validators
 
 
 class RegistrationForm(Form):
@@ -10,9 +10,12 @@ class RegistrationForm(Form):
 
 
 class FpsForm(Form):
-    code = StringField('Submission Code', [validators.InputRequired()])
+    #code = StringField('Submission Code', [validators.InputRequired()])
     cpu = StringField('CPU', [validators.InputRequired()])
     gpu = StringField('GPU', [validators.InputRequired()])
     ram = StringField('RAM', [validators.InputRequired()])
+#    resolution = SelectField('Reslution', choices=[ ('921600', '1280x720'),('1764000', '1680x1050'),('2073600', '1920x1080'), ('3686400', '2560x1440'), ('3686400', '2560x1440'), ('8294400', '3840x2160')], validators=[validators.InputRequired()])
+    resolution = SelectField('Reslution', choices=[ ('1280x720', '1280x720'),('1680x1050', '1680x1050'),('1920x1080', '1920x1080'), ('2560x1440', '2560x1440'), ('2560x1440', '2560x1440'), ('3840x2160', '3840x2160')], validators=[validators.InputRequired()])
+    sq_ver = SelectField('Squad Version', choices=[('0914', '9.14'), ('0915', '9.15'), ('0916', '9.16')], validators=[validators.InputRequired()])
     fps_values = FileField('FPS Values CSV file')
 #    fps_values = FileField('FPS Values CSV file', [validators.regexp(ur'^[^/\\]\.csv$')])
