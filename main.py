@@ -89,7 +89,7 @@ def fps_submitted():
         min_val = item if min_val > item else min_val
 
     valid_data_count = len(csv_data) - invalid_lines
-    avg = float(avg) / valid_data_count
+    avg = int(round(float(avg) / valid_data_count))
 
     #Loop through a second time to establish the average standard deviation
     total_diff_from_avg = 0
@@ -100,7 +100,8 @@ def fps_submitted():
 
     std_dev = total_diff_from_avg / valid_data_count
 
-    testModel = PC_Config(cpu, gpu, ram, res)
+    testModel = PC_Config.create(cpu, gpu, ram, res)
 
+    print(testModel.CPU)
     #Should make a view model to clean up the render_template call
     return render_template("submitted_form.html", cpu=cpu, gpu=gpu, ram=ram, avg=avg, std_dev = std_dev, max_val = max_val, min_val = min_val, csv_data=csv_data)

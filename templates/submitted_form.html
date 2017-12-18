@@ -6,16 +6,13 @@
 <div class="jumbotron">
     <div class="container">
         <h1 class="display-3">
-            Thanks for the submission!
-            {% if error_string %}
-             But...
-            {% endif %}
+            Thanks for the submission! {% if error_string %} But... {% endif %}
         </h1>
-        {% if error_string %}<div class="alert alert-danger">{{ error_string }}</div>{% endif %}
+        {% if error_string %}
+        <div class="alert alert-danger">{{ error_string }}</div>{% endif %}
     </div>
 </div>
-{% endblock jumbotron %} {% block content %}
-{% if not error_string %}
+{% endblock jumbotron %} {% block content %} {% if not error_string %}
 <h2>Submitted data</h2>
 <div>
     <span>CPU: </span>
@@ -31,7 +28,7 @@
 </div>
 <div>
     <span>Average FPS: </span>
-    <span>{{ avg }} (± {{ std_dev }} )</span>
+    <span>{{ avg }} ± {{ std_dev }}</span>
 </div>
 <div>
     <span>Min/Max FPS: </span>
@@ -39,8 +36,14 @@
 </div>
 <hr>
 <div>Raw Upload Data:</div>
-{% for entry in csv_data %}
-<div>{{ entry }}</div>
-{% endfor %}
-{% endif %}
-{% endblock content %}
+<table>
+    <tr>
+        {% for entry in csv_data %} {% if loop.index0 % 20 == 0 %}
+    </tr>
+    <tr>
+        {% endif %}
+        <td>{{ entry }}</td>
+        {% endfor %}
+    </tr>
+</table>
+{% endif %} {% endblock content %}
