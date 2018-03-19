@@ -1,0 +1,45 @@
+{% extends "main_template.html" %}
+<!-- Description -->
+{% block title %}Title{% endblock %}
+<!-- Jumbotron -->
+{% block jumbotron %} {% endblock jumbotron %}
+<!-- Content Start -->
+{% block content %}
+</div>
+<style>
+    .header-bar {
+        background-color: #ccc;
+        text-align: center;
+        padding: 20px 0px;
+        margin-bottom: 50px;
+        border-bottom: 5px #676767 solid;
+    }
+
+    .stock-search-box h2 {
+        text-align: center;
+    }
+
+    .stock-search-box {
+        background-color: pink;
+        padding: 30px 20px;
+        border: green 2px solid;
+    }
+
+</style>
+<div class="container-fluid header-bar" style="margin-top: 100px;">
+    <h1>Stock Genie</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 rounded stock-search-box">
+            <h2>Search for a stock</h2>
+            <form id="stock-search">
+                <input class="form-control form-control-lg" name="search-item" type="text" placeholder="Stock symbol or stock name">
+                <button class="btn btn-outline-primary">Search Button</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

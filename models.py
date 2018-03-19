@@ -1,4 +1,5 @@
 from google.appengine.ext import ndb
+from werkzeug.security import generate_password_hash, check_password_hash
 import hashlib
 
 ### Models used in the program ###
@@ -11,7 +12,6 @@ import hashlib
 
 # PC config model (GPU/CPU/RAM/Resolution)
 class PC_Config(ndb.model.Model):
-    id = ndb.KeyProperty()
     CPU = ndb.StringProperty()
     GPU = ndb.StringProperty()
     RAM = ndb.StringProperty()
@@ -43,5 +43,44 @@ class PC_Config(ndb.model.Model):
 # Submission model (PC hash, squad version, map, max, min std dev)
 
 # User model
+class User(ndb.model.Model):
+    username = ndb.StringProperty()
+    password = ndb.StringProperty()
+    email = ndb.StringProperty()
+    activated = ndb.BooleanProperty()
+    last_login = ndb.DateTimeProperty()
+    created = ndb.DateTimeProperty(auto_now_add=True)
+
+    num_submissions = ndb.IntegerProperty()
+
+    @classmethod
+    def get_by_id(cls, user_id):
+        user_key = ndb.Key('User', str(user_id).lower())
+        return user_key.get()
+
+    def get_activation_hash(self):
+        return hashlib.sha1(username)
+
+    @classmethod
+    def hash_password(self, pass_to_hash):
+        return generate_password_hash(pass_to_hash)
+
+    def check_password(self, pass_to_check):
+        return check_password_hash(self.password, pass_to_check)
+
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_active(self):
+        return True#self.activated
+
+    @property
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return self.username.lower()
 
 # Waiting approval submission

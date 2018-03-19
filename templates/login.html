@@ -1,0 +1,29 @@
+{% extends "main_template.html" %} {% block title %}Login{% endblock %}
+<!-- Jumbotron -->
+{% block jumbotron %}
+<div class="jumbotron">
+</div>
+{% endblock jumbotron %}
+<!-- Content Start -->
+{% block content %}
+<h2>Login to the system</h2>
+<form method="post" action="{{ url_for('login') }}" enctype="multipart/form-data">
+
+    {% for field in form %}
+    <div class="row">
+        <div class="col-md-4">{{ field.label }}{% if field.flags.required %}*{% endif %}</div>
+        <div class="col-md-8">{{ field }}</div>
+    </div>
+    {% endfor %}
+</form>
+
+{% if form.errors %}
+    <ul class="errors">
+        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+            {% for error in field_errors %}
+                <li>{{ form[field_name].label }}: {{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock content %}

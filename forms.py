@@ -1,12 +1,18 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from wtforms import Form, BooleanField, StringField, SelectField, FileField, validators
+from wtforms import Form, BooleanField, StringField, PasswordField, SelectField, FileField, SubmitField, validators
 
 
 class RegistrationForm(Form):
-    username = StringField('Username', [validators.Length(min=4, max=25)])
-    email = StringField('Email Address', [validators.Length(min=6, max=35)])
+    username = StringField('Username', [validators.Length(min=4, max=25),validators.DataRequired()])
+    password = PasswordField('Password', [
+        validators.DataRequired(),
+        validators.EqualTo('password_confirm', message='Passwords must match')
+    ])
+    password_confirm = PasswordField('Confirm Password',[validators.DataRequired()])
+    email = StringField('Email Address', [validators.Length(min=6, max=35),validators.DataRequired()])
     accept_rules = BooleanField('I accept the site rules', [validators.InputRequired()])
+    submit = SubmitField('Submit')
 
 
 class FpsForm(Form):
@@ -19,3 +25,8 @@ class FpsForm(Form):
     sq_ver = SelectField('Squad Version', choices=[('0914', '9.14'), ('0915', '9.15'), ('0916', '9.16')], validators=[validators.InputRequired()])
     fps_values = FileField('FPS Values CSV file')
 #    fps_values = FileField('FPS Values CSV file', [validators.regexp(ur'^[^/\\]\.csv$')])
+
+class LoginForm(Form):
+    username = StringField('Username', [validators.Length(min=4, max=25)])
+    password = PasswordField('Password')
+    submit = SubmitField('Submit')
