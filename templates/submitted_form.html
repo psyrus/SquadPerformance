@@ -3,7 +3,6 @@
 {% block title %}Thank you for your submission{% endblock %}
 <!-- Jumbotron -->
 {% block jumbotron %}
-<div class="jumbotron">
     <div class="container">
         <h1 class="display-3">
             Thanks for the submission! {% if error_string %} But... {% endif %}
@@ -11,7 +10,6 @@
         {% if error_string %}
         <div class="alert alert-danger">{{ error_string }}</div>{% endif %}
     </div>
-</div>
 {% endblock jumbotron %} {% block content %} {% if not error_string %}
 <h2>Submitted data</h2>
 <div>
