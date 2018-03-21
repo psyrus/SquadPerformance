@@ -5,5 +5,7 @@ threadsafe: true
 handlers:
 - url: /static
   static_dir: static
+- url: /oid/.*
+  script: openid_testgae.app
 - url: /.*
   script: main.app
